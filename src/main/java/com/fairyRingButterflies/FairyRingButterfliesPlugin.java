@@ -26,8 +26,9 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	private static Integer STANDARD_RING_ID = 29495;
 	private static Integer ZANARIS_RING_ID = 29560;
 	private static Integer POH_RING_ID = 29228;
+	private static Integer ARCEUUS_RING_ID = 14839;
 
-	private static List<Integer> fairyRingIds = Arrays.asList(STANDARD_RING_ID, ZANARIS_RING_ID, POH_RING_ID);
+	private static List<Integer> fairyRingIds = Arrays.asList(STANDARD_RING_ID, ZANARIS_RING_ID, POH_RING_ID, ARCEUUS_RING_ID);
 
 	private List<FairyRing> fairyRings = new ArrayList<>();
 	private FairyRing pohRing = null;
@@ -106,7 +107,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	private void addToRememberedFairyRings(GameObject gameObject) {
-		//Have to hold onto last3 rings, as that's how many can be on screen.
+		//Have to hold onto last 3 rings, as that's how many can be on screen.
 		//Hold the POH one separately as it's a different model.
 		if (gameObject.getId() == POH_RING_ID) {
 			if (defaultHouseColours1 == null) {
@@ -166,4 +167,5 @@ public class FairyRingButterfliesPlugin extends Plugin {
 			}
 		}
 	}
+
 }
