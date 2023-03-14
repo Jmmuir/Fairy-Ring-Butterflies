@@ -5,4 +5,4 @@ TO-DO:
 
 ~ enable for rings which are there when you log in
 
-~ allow customisation per-biome
+~ fix butterflies reverting when "configuring" the ring
