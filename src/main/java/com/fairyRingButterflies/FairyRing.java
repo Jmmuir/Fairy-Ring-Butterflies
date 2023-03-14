@@ -16,25 +16,13 @@ public class FairyRing {
     public static int POH_COLOUR_REGION_OFFSET = 2469;
 
     GameObject gameObject;
-
     boolean isPOH;
+    Biome biome;
 
-    private enum biome {
-        PLAINS,
-        DESERT,
-        ISLAND,
-        CAVE,
-        MOUNTAINS,
-        SWAMP,
-        JUNGLE,
-        ABYSS,
-        EXTRAPLANAR,
-
-    }
-
-    public FairyRing (GameObject gameObject, boolean isPOH) {
+    public FairyRing (GameObject gameObject, boolean isPOH, Biome biome) {
         this.gameObject = gameObject;
         this.isPOH = isPOH;
+        this.biome = biome;
     }
 
     private boolean isButterflyBody(int arrayPosition) {
@@ -69,14 +57,11 @@ public class FairyRing {
         return false;
     }
 
-    public void recolourButterflies(FairyRingButterfliesConfig config) {
+    public void recolourButterflies(Color bodyColour, Color innerColour, Color outerColour) {
         Model model = gameObject.getRenderable().getModel();
         int[] colours1 = model.getFaceColors1();
         int[] colours2 = model.getFaceColors2();
         int[] colours3 = model.getFaceColors3();
-        Color bodyColour = config.colourBody();
-        Color innerColour = config.colourWingInner();
-        Color outerColour = config.colourWingOuter();
         int hsbColour1 = colorToRs2hsb(bodyColour.getRed(), bodyColour.getGreen(), bodyColour.getBlue());
         int hsbColour2 = colorToRs2hsb(innerColour.getRed(), innerColour.getGreen(), innerColour.getBlue());
         int hsbColour3 = colorToRs2hsb(outerColour.getRed(), outerColour.getGreen(), outerColour.getBlue());

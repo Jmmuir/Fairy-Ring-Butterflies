@@ -4,6 +4,7 @@ import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.config.ConfigManager;
@@ -12,7 +13,6 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,20 +47,17 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	private FairyRingButterfliesConfig config;
 
 	@Override
-	protected void startUp() throws Exception
-	{
+	protected void startUp() throws Exception {
 		applySettings();
 	}
 
 	@Override
-	protected void shutDown() throws Exception
-	{
+	protected void shutDown() throws Exception {
         resetToOriginalColours();
 	}
 
 	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
+	public void onGameStateChanged(GameStateChanged gameStateChanged) {
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
 		{
 			//once we have known areas containing fairy rings, apply settings on login.
@@ -68,8 +65,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	@Provides
-	FairyRingButterfliesConfig provideConfig(ConfigManager configManager)
-	{
+	FairyRingButterfliesConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(FairyRingButterfliesConfig.class);
 	}
 
@@ -90,10 +86,85 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	private void applySettingsToRing(FairyRing fairyRing) {
-		if (config.removeButterflies()) {
-			fairyRing.removeButterflies();
+		if (!config.biomeColours() || fairyRing.biome == null) {
+			if (config.removeButterflies()) {
+				fairyRing.removeButterflies();
+			} else {
+				fairyRing.recolourButterflies(config.colourBody(), config.colourWingInner(), config.colourWingOuter());
+			}
 		} else {
-			fairyRing.recolourButterflies(config);
+			switch (fairyRing.biome) {
+				case PLAINS:
+					if (config.removeButterfliesPlains()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyPlains(), config.colourWingInnerPlains(), config.colourWingOuterPlains());
+					}
+					break;
+				case DESERT:
+					if (config.removeButterfliesDesert()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyDesert(), config.colourWingInnerDesert(), config.colourWingOuterDesert());
+					}
+					break;
+				case ISLAND:
+					if (config.removeButterfliesIsland()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyIsland(), config.colourWingInnerIsland(), config.colourWingOuterIsland());
+					}
+					break;
+				case CAVE:
+					if (config.removeButterfliesCave()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyCave(), config.colourWingInnerCave(), config.colourWingOuterCave());
+					}
+					break;
+				case MOUNTAINS:
+					if (config.removeButterfliesMountains()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyMountains(), config.colourWingInnerMountains(), config.colourWingOuterMountains());
+					}
+					break;
+				case SWAMP:
+					if (config.removeButterfliesSwamp()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodySwamp(), config.colourWingInnerSwamp(), config.colourWingOuterSwamp());
+					}
+					break;
+				case JUNGLE:
+					if (config.removeButterfliesJungle()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyJungle(), config.colourWingInnerJungle(), config.colourWingOuterJungle());
+					}
+					break;
+				case ABYSS:
+					if (config.removeButterfliesAbyss()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyAbyss(), config.colourWingInnerAbyss(), config.colourWingOuterAbyss());
+					}
+					break;
+				case EXTRAPLANAR:
+					if (config.removeButterfliesExtraplanar()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyExtraplanar(), config.colourWingInnerExtraplanar(), config.colourWingOuterExtraplanar());
+					}
+					break;
+				case VOLCANIC:
+					if (config.removeButterfliesVolcanic()) {
+						fairyRing.removeButterflies();
+					} else {
+						fairyRing.recolourButterflies(config.colourBodyVolcanic(), config.colourWingInnerVolcanic(), config.colourWingOuterVolcanic());
+					}
+					break;
+			}
 		}
 	}
 
@@ -113,7 +184,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 			if (defaultHouseColours1 == null) {
 				storeOriginalColours(gameObject.getRenderable().getModel(), true);
 			}
-			pohRing = new FairyRing(gameObject, true);
+			pohRing = new FairyRing(gameObject, true, null);
 		} else {
 			if (defaultColours1 == null) {
 				storeOriginalColours(gameObject.getRenderable().getModel(), false);
@@ -122,7 +193,8 @@ public class FairyRingButterfliesPlugin extends Plugin {
             while (fairyRings.size() > 2) {
             	fairyRings.remove(0);
             }
-            fairyRings.add(new FairyRing(gameObject, false));
+			WorldPoint location = gameObject.getWorldLocation();
+            fairyRings.add(new FairyRing(gameObject, false, LocationBiomeMap.getBiomeForCoordinates(location.getX(), location.getY())));
 		}
 	}
 
@@ -167,5 +239,4 @@ public class FairyRingButterfliesPlugin extends Plugin {
 			}
 		}
 	}
-
 }
