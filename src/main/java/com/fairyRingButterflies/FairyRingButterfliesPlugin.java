@@ -63,9 +63,26 @@ public class FairyRingButterfliesPlugin extends Plugin {
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-			//once we have known areas containing fairy rings, apply settings on login.
+		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
+			Scene scene = client.getScene();
+			Tile[][] tiles = scene.getTiles()[0];
+			for (int x = 0; x < Constants.SCENE_SIZE; ++x) {
+				for (int y = 0; y < Constants.SCENE_SIZE; ++y) {
+					Tile tile = tiles[x][y];
+					if (tile == null) {
+						continue;
+					}
+					for (GameObject gameObject : tile.getGameObjects()) {
+						if (gameObject == null) {
+							continue;
+						}
+						if (fairyRingIds.contains(gameObject.getId())) {
+							addToRememberedFairyRings(gameObject);
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -256,9 +273,15 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	public void onMenuOptionClicked(MenuOptionClicked event) {
 		//Record that a configure action was started/completed on a ring.
 		//This lets us selectively jump in and reapply the settings immediately after the model reloads from it.
+		//It's possible we could enter that state incorrectly, but the load from doing so should be fairly light.
 		if (event.getMenuOption().equals("Configure")) {
 			stateOfRingConfigure = 1;
 		} else if (event.getMenuOption().equals("Confirm") && stateOfRingConfigure == 1) {
+			stateOfRingConfigure = 2;
+		}
+		//User's just finished logging in, so do the same as we do when a ring is configured.
+		//This gives us a chance to pass over any rings that were found when logging in and recolour them now that they're rendered.
+		if (event.getMenuOption().equals("Play") && event.getMenuTarget().equals("")) {
 			stateOfRingConfigure = 2;
 		}
 	}
@@ -268,7 +291,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 		if (stateOfRingConfigure > 1) {
 			applySettings();
 
-			//Bit sloppy, but make sure the next two ticks after we think we've completed a ring configure, we recolour.
+			//Bit sloppy, but make sure the next two ticks after we think we've completed a ring configure or login, we recolour.
 			//There's no event that triggers right on the configure action, but it replaces the model with default colours.
 			if (stateOfRingConfigure == 2) {
 				stateOfRingConfigure = 3;
