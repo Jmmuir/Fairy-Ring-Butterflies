@@ -7,6 +7,9 @@ import net.runelite.api.*;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.AnimationChanged;
+import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.events.GameTick;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
@@ -39,6 +42,8 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	private int[] defaultHouseColours1 = null;
 	private int[] defaultHouseColours2 = null;
 	private int[] defaultHouseColours3 = null;
+
+	private static int stateOfRingConfigure = 0;
 
 	@Inject
 	private Client client;
@@ -236,6 +241,39 @@ public class FairyRingButterfliesPlugin extends Plugin {
 				colours1[i] = defaultHouseColours1[i];
 				colours2[i] = defaultHouseColours2[i];
 				colours3[i] = defaultHouseColours3[i];
+			}
+		}
+	}
+
+	@Subscribe
+	public void onAnimationChanged(AnimationChanged animationEvent) {
+		if(animationEvent.getActor().getAnimation() == 3265 && client.getLocalPlayer().getAnimation() == 3265){
+			//applySettings();
+		}
+	}
+
+	@Subscribe
+	public void onMenuOptionClicked(MenuOptionClicked event) {
+		//Record that a configure action was started/completed on a ring.
+		//This lets us selectively jump in and reapply the settings immediately after the model reloads from it.
+		if (event.getMenuOption().equals("Configure")) {
+			stateOfRingConfigure = 1;
+		} else if (event.getMenuOption().equals("Confirm") && stateOfRingConfigure == 1) {
+			stateOfRingConfigure = 2;
+		}
+	}
+
+	@Subscribe
+	public void onGameTick(GameTick event) {
+		if (stateOfRingConfigure > 1) {
+			applySettings();
+
+			//Bit sloppy, but make sure the next two ticks after we think we've completed a ring configure, we recolour.
+			//There's no event that triggers right on the configure action, but it replaces the model with default colours.
+			if (stateOfRingConfigure == 2) {
+				stateOfRingConfigure = 3;
+			} else {
+				stateOfRingConfigure = 0;
 			}
 		}
 	}
