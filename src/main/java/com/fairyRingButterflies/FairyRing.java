@@ -58,13 +58,21 @@ public class FairyRing {
     }
 
     public void recolourButterflies(Color bodyColour, Color innerColour, Color outerColour) {
+        int hsbColour1 = colorToRs2hsb(bodyColour.getRed(), bodyColour.getGreen(), bodyColour.getBlue());
+        int hsbColour2 = colorToRs2hsb(innerColour.getRed(), innerColour.getGreen(), innerColour.getBlue());
+        int hsbColour3 = colorToRs2hsb(outerColour.getRed(), outerColour.getGreen(), outerColour.getBlue());
+        applyColourCode(hsbColour1, hsbColour2, hsbColour3);
+    }
+
+    public void removeButterflies() {
+        applyColourCode(-2,-2, -2);
+    }
+
+    private void applyColourCode(int bodyColour, int innerColour, int outerColour) {
         Model model = gameObject.getRenderable().getModel();
         int[] colours1 = model.getFaceColors1();
         int[] colours2 = model.getFaceColors2();
         int[] colours3 = model.getFaceColors3();
-        int hsbColour1 = colorToRs2hsb(bodyColour.getRed(), bodyColour.getGreen(), bodyColour.getBlue());
-        int hsbColour2 = colorToRs2hsb(innerColour.getRed(), innerColour.getGreen(), innerColour.getBlue());
-        int hsbColour3 = colorToRs2hsb(outerColour.getRed(), outerColour.getGreen(), outerColour.getBlue());
         int i = 0;
         int relativePos = 0;
         if (isPOH) {
@@ -73,32 +81,16 @@ public class FairyRing {
         }
         for (; i < colours1.length; i++) {
             if (isButterflyBody(i)) {
-                colours1[i] = hsbColour1;
-                colours2[i] = hsbColour1;
-                colours3[i] = hsbColour1;
+                colours1[i] = bodyColour;
+                colours2[i] = bodyColour;
+                colours3[i] = bodyColour;
             } else if (i > 115) {
                 if (INNER_COLOUR_POSITIONS.contains(i - relativePos)) {
-                    recolourRegion(i, colours1, colours2, colours3, hsbColour2);
+                    recolourRegion(i, colours1, colours2, colours3, innerColour);
                 } else if (OUTER_COLOUR_POSITIONS.contains(i - relativePos) || REVERSE_COLOUR_POSITIONS.contains(i - relativePos) || EDGE_COLOUR_POSITIONS.contains(i - relativePos)) {
-                    recolourRegion(i, colours1, colours2, colours3, hsbColour3);
+                    recolourRegion(i, colours1, colours2, colours3, outerColour);
                 }
             }
-        }
-    }
-
-    public void removeButterflies() {
-        Model model = gameObject.getRenderable().getModel();
-        int[] colours1 = model.getFaceColors1();
-        int[] colours2 = model.getFaceColors2();
-        int[] colours3 = model.getFaceColors3();
-        int i = 0;
-        if (isPOH) {
-            i = POH_COLOUR_REGION_OFFSET;
-        }
-        for (; i < colours1.length; i++) {
-            colours1[i] = -2;
-            colours2[i] = -2;
-            colours3[i] = -2;
         }
     }
 
