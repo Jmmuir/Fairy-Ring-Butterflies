@@ -96,9 +96,9 @@ public class FairyRing {
             i = POH_COLOUR_REGION_OFFSET;
         }
         for (; i < colours1.length; i++) {
-            colours1[i] = -1;
-            colours2[i] = -1;
-            colours3[i] = -1;
+            colours1[i] = -2;
+            colours2[i] = -2;
+            colours3[i] = -2;
         }
     }
 
