@@ -47,6 +47,9 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	@Inject
 	private FairyRingButterfliesConfig config;
 
+	@Inject
+	private ConfigManager configManager;
+
 	@Override
 	protected void startUp() throws Exception {
 		applySettings();
@@ -89,8 +92,15 @@ public class FairyRingButterfliesPlugin extends Plugin {
 
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event) {
-		if (event.getGroup().equals(FairyRingButterfliesConfig.CONFIG_NAME)) {
-			applySettings();
+		if (event.getGroup().equals(FairyRingButterfliesConfig.CONFIG_NAME) && !event.getKey().equals("data")) {
+			if (event.getKey().equals("export") && event.getNewValue().equals("true")) {
+				ConfigExportImport.exportConfigToTextBox(configManager);
+			} else {
+				if (event.getKey().equals("import") && event.getNewValue().equals("true")) {
+					ConfigExportImport.ImportConfigFromTextBox(configManager);
+				}
+				applySettings();
+			}
 		}
 	}
 
@@ -257,13 +267,6 @@ public class FairyRingButterfliesPlugin extends Plugin {
 				colours2[i] = defaultHouseColours2[i];
 				colours3[i] = defaultHouseColours3[i];
 			}
-		}
-	}
-
-	@Subscribe
-	public void onAnimationChanged(AnimationChanged animationEvent) {
-		if(animationEvent.getActor().getAnimation() == 3265 && client.getLocalPlayer().getAnimation() == 3265){
-			//applySettings();
 		}
 	}
 

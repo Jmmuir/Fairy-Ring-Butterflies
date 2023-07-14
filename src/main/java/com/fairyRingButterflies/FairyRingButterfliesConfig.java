@@ -100,6 +100,13 @@ public interface FairyRingButterfliesConfig extends Config
 			closedByDefault = true
 	)
 	String volcanicSection = "volcanicColours";
+	@ConfigSection(
+			name = "Export/Import",
+			description = "Export or Import your colour settings",
+			position = 12,
+			closedByDefault = true
+	)
+	String exportImport = "exportImport";
 
 
 	@ConfigItem(
@@ -610,5 +617,39 @@ public interface FairyRingButterfliesConfig extends Config
 	default Color colourBodyVolcanic()
 	{
 		return Color.DARK_GRAY;
+	}
+
+	@ConfigItem(
+			keyName = "export",
+			name = "Export data",
+			description = "Exports the current colour settings. Will export biome data only if biome mode is on",
+			position = 0,
+			section = exportImport
+	)
+	default boolean exportBool()
+	{
+		return false;
+	}
+	@ConfigItem(
+			keyName = "import",
+			name = "Import from data text field",
+			description = "Imports the settings defined in the text field below, produced by an export",
+			position = 1,
+			section = exportImport
+	)
+	default boolean importBool()
+	{
+		return false;
+	}
+	@ConfigItem(
+			keyName = "data",
+			name = "Data",
+			description = "Data to import",
+			position = 2,
+			section = exportImport
+	)
+	default String data()
+	{
+		return "";
 	}
 }
