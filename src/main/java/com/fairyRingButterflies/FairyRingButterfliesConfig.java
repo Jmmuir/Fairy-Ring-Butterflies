@@ -7,9 +7,15 @@ import net.runelite.client.config.ConfigSection;
 
 import java.awt.*;
 
-@ConfigGroup("fairyRingButterflies")
+import static com.fairyRingButterflies.FairyRingButterfliesConfig.CONFIG_NAME;
+
+
+@ConfigGroup(CONFIG_NAME)
 public interface FairyRingButterfliesConfig extends Config
 {
+
+	String CONFIG_NAME = "fairyRingButterflies";
+
 	@ConfigSection(
 			name = "Behaviour",
 			description = "Flags which determine plugin behaviour",

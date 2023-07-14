@@ -89,7 +89,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event) {
-		if (event.getGroup().equals("fairyRingButterflies")) {
+		if (event.getGroup().equals(FairyRingButterfliesConfig.CONFIG_NAME)) {
 			applySettings();
 		}
 	}
