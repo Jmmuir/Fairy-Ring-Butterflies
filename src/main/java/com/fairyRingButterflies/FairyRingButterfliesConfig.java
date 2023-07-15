@@ -130,7 +130,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default boolean biomeColours()
 	{
-		return false;
+		return true;
 	}
 
 
@@ -143,7 +143,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInner()
 	{
-		return Color.WHITE;
+		return new Color(-675597);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuter",
@@ -154,7 +154,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuter()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-7784534);
 	}
 	@ConfigItem(
 			keyName = "colourBody",
@@ -165,7 +165,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBody()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-15463673);
 	}
 
 
@@ -189,7 +189,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerPlains()
 	{
-		return Color.WHITE;
+		return new Color(-1);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterPlains",
@@ -200,7 +200,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterPlains()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-15977106);
 	}
 	@ConfigItem(
 			keyName = "colourBodyPlains",
@@ -211,7 +211,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyPlains()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-15791611);
 	}
 
 	@ConfigItem(
@@ -234,7 +234,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerDesert()
 	{
-		return Color.WHITE;
+		return new Color(-2372541);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterDesert",
@@ -245,7 +245,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterDesert()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-10202598);
 	}
 	@ConfigItem(
 			keyName = "colourBodyDesert",
@@ -256,7 +256,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyDesert()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-14215401);
 	}
 
 	@ConfigItem(
@@ -279,7 +279,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerIsland()
 	{
-		return Color.WHITE;
+		return new Color(-9266246);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterIsland",
@@ -290,7 +290,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterIsland()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-5843480);
 	}
 	@ConfigItem(
 			keyName = "colourBodyIsland",
@@ -301,7 +301,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyIsland()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-11054510);
 	}
 
 	@ConfigItem(
@@ -313,7 +313,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default boolean removeButterfliesCave()
 	{
-		return false;
+		return true;
 	}
 	@ConfigItem(
 			keyName = "colourWingInnerCave",
@@ -369,7 +369,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerMountains()
 	{
-		return Color.WHITE;
+		return new Color(-13219102);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterMountains",
@@ -380,7 +380,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterMountains()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-15660277);
 	}
 	@ConfigItem(
 			keyName = "colourBodyMountains",
@@ -391,7 +391,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyMountains()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-16242420);
 	}
 
 	@ConfigItem(
@@ -414,7 +414,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerSwamp()
 	{
-		return Color.WHITE;
+		return new Color(-15884248);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterSwamp",
@@ -425,7 +425,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterSwamp()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-15979004);
 	}
 	@ConfigItem(
 			keyName = "colourBodySwamp",
@@ -436,7 +436,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodySwamp()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-14082016);
 	}
 
 	@ConfigItem(
@@ -459,7 +459,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerJungle()
 	{
-		return Color.WHITE;
+		return new Color(-2487260);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterJungle",
@@ -470,7 +470,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterJungle()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-679905);
 	}
 	@ConfigItem(
 			keyName = "colourBodyJungle",
@@ -481,7 +481,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyJungle()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-14277365);
 	}
 
 	@ConfigItem(
@@ -504,7 +504,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerAbyss()
 	{
-		return Color.WHITE;
+		return new Color(-14361252);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterAbyss",
@@ -515,7 +515,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterAbyss()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-7334121);
 	}
 	@ConfigItem(
 			keyName = "colourBodyAbyss",
@@ -526,7 +526,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyAbyss()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-16647463);
 	}
 
 	@ConfigItem(
@@ -549,7 +549,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerExtraplanar()
 	{
-		return Color.WHITE;
+		return new Color(-15672800);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterExtraplanar",
@@ -560,7 +560,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterExtraplanar()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-16221014);
 	}
 	@ConfigItem(
 			keyName = "colourBodyExtraplanar",
@@ -571,7 +571,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyExtraplanar()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-2989073);
 	}
 
 	@ConfigItem(
@@ -594,7 +594,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingInnerVolcanic()
 	{
-		return Color.WHITE;
+		return new Color(-15137531);
 	}
 	@ConfigItem(
 			keyName = "colourWingOuterVolcanic",
@@ -605,7 +605,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourWingOuterVolcanic()
 	{
-		return Color.LIGHT_GRAY;
+		return new Color(-15132391);
 	}
 	@ConfigItem(
 			keyName = "colourBodyVolcanic",
@@ -616,7 +616,7 @@ public interface FairyRingButterfliesConfig extends Config
 	)
 	default Color colourBodyVolcanic()
 	{
-		return Color.DARK_GRAY;
+		return new Color(-12566464);
 	}
 
 	@ConfigItem(
