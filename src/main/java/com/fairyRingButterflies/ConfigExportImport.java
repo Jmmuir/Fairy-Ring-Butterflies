@@ -129,16 +129,16 @@ public class ConfigExportImport {
             sb.append(config.colourWingOuterVolcanic().getRGB());
             sb.append(":");
             sb.append(config.colourWingInnerVolcanic().getRGB());
-        } else {
-            sb.append("Base:");
-            sb.append(config.removeButterflies());
-            sb.append(":");
-            sb.append(config.colourBody().getRGB());
-            sb.append(":");
-            sb.append(config.colourWingOuter().getRGB());
-            sb.append(":");
-            sb.append(config.colourWingInner().getRGB());
+            sb.append("|");
         }
+        sb.append("Base:");
+        sb.append(config.removeButterflies());
+        sb.append(":");
+        sb.append(config.colourBody().getRGB());
+        sb.append(":");
+        sb.append(config.colourWingOuter().getRGB());
+        sb.append(":");
+        sb.append(config.colourWingInner().getRGB());
         return sb.toString();
     }
 
@@ -156,10 +156,10 @@ public class ConfigExportImport {
             throw new Exception("unknown biome group: \"" + configBits[0] + "\". check data format is correct.");
         }
 
-        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "removeButterflies" + configBits[0], Boolean.valueOf(configBits[1]));
-        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "colourBody" + configBits[0], new Color(Integer.parseInt(configBits[2])));
-        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "colourWingOuter" + configBits[0], new Color(Integer.parseInt(configBits[3])));
-        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "colourWingInner" + configBits[0], new Color(Integer.parseInt(configBits[4])));
+        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "removeButterflies" + configSuffix, Boolean.valueOf(configBits[1]));
+        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "colourBody" + configSuffix, new Color(Integer.parseInt(configBits[2])));
+        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "colourWingOuter" + configSuffix, new Color(Integer.parseInt(configBits[3])));
+        configManager.setConfiguration(FairyRingButterfliesConfig.CONFIG_NAME, "colourWingInner" + configSuffix, new Color(Integer.parseInt(configBits[4])));
 
     }
 
