@@ -47,6 +47,7 @@ public class LocationBiomeMap {
         map.put(2412, Biome.EXTRAPLANAR); //BKS:Zanaris
         map.put(2437, Biome.VOLCANIC); //BLP
         map.put(3351, Biome.PLAINS); //BLR - Y
+        map.put(1295, Biome.MOUNTAINS); //BLS
 
         map.put(2513, Biome.ISLAND); //CIP
         map.put(2528, Biome.PLAINS); //CIQ
