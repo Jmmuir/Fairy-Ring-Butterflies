@@ -29,6 +29,7 @@ public class LocationBiomeMap {
         map.put(2500, Biome.ISLAND); //AJS
         map.put(3284, Biome.DESERT); //AKP
         map.put(2319, Biome.PLAINS); //AKQ
+        map.put(1826, Biome.PLAINS); //AKR
         map.put(2571, Biome.JUNGLE); //AKS
         map.put(2503, Biome.ISLAND); //ALP
         map.put(3597, Biome.SWAMP); //ALQ
@@ -72,5 +73,7 @@ public class LocationBiomeMap {
         map.put(3423, Biome.DESERT); //DLQ
         map.put(2213, Biome.SWAMP); //DLR
         map.put(9824, Biome.CAVE); //DLS - Y
+
+        map.put(2328, Biome.EXTRAPLANAR); //Fairy Queen Hideout
     }
 }
