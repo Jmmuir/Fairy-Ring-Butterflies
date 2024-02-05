@@ -207,6 +207,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	private void addToRememberedFairyRings(GameObject gameObject) {
+		
 		//Have to hold onto last 3 rings, as that's how many can be on screen.
 		//Hold the POH one separately as it's a different model.
 		if (gameObject.getId() == POH_RING_ID) {
@@ -291,12 +292,12 @@ public class FairyRingButterfliesPlugin extends Plugin {
 		if (stateOfRingConfigure > 1) {
 			applySettings();
 
-			//Bit sloppy, but make sure the next two ticks after we think we've completed a ring configure or login, we recolour.
+			//Bit sloppy, but make sure the next four ticks after we think we've completed a ring configure or login, we recolour.
 			//There's no event that triggers right on the configure action, but it replaces the model with default colours.
-			if (stateOfRingConfigure == 2) {
-				stateOfRingConfigure = 3;
-			} else {
+			if (stateOfRingConfigure > 5) {
 				stateOfRingConfigure = 0;
+			} else {
+				stateOfRingConfigure++;
 			}
 		}
 	}
