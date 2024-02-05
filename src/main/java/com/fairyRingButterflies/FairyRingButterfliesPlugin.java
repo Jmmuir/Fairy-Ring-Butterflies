@@ -25,9 +25,8 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	private static Integer STANDARD_RING_ID = 29495;
 	private static Integer ZANARIS_RING_ID = 29560;
 	private static Integer POH_RING_ID = 29228;
-	private static Integer ARCEUUS_RING_ID = 14839;
 
-	private static List<Integer> fairyRingIds = Arrays.asList(STANDARD_RING_ID, ZANARIS_RING_ID, POH_RING_ID, ARCEUUS_RING_ID);
+	private static List<Integer> fairyRingIds = Arrays.asList(STANDARD_RING_ID, ZANARIS_RING_ID, POH_RING_ID);
 
 	private List<FairyRing> fairyRings = new ArrayList<>();
 	private FairyRing pohRing = null;
