@@ -59,6 +59,7 @@ public class LocationBiomeMap {
         map.put(2075, Biome.EXTRAPLANAR); //CKP
         map.put(2801, Biome.JUNGLE); //CKR
         map.put(3470, Biome.SWAMP); //CKS - Y
+        map.put(1359, Biome.PLAINS); //CKQ
         map.put(3082, Biome.ISLAND); //CLP
         map.put(2738, Biome.JUNGLE); //CLR -Y
         map.put(2682, Biome.JUNGLE); //CLS
