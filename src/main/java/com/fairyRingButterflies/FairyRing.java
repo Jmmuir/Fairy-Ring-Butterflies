@@ -1,5 +1,6 @@
 package com.fairyRingButterflies;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.GameObject;
 import net.runelite.api.Model;
 
@@ -7,6 +8,7 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 public class FairyRing {
     private static List<Integer> INNER_COLOUR_POSITIONS = Arrays.asList(148,149,150,151,152,153,154,155,156,157,170,171,172,173,174,199,200,201,202,203);
     private static List<Integer> OUTER_COLOUR_POSITIONS = Arrays.asList(127,128,129,130,134,135,158,175,177,178,179,180,181,182,183,184,188,189,190,191,192);
@@ -95,9 +97,8 @@ public class FairyRing {
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("NPException trying to recolour a ring, probably trying to colour something with no model.");
-            System.out.println("If you see this, please report it on the plugin's github.");
-            e.printStackTrace();
+            log.warn("NPException trying to recolour a ring, probably trying to colour something with no model.", e);
+            log.warn("If you see this, please report it on the plugin's github.");
         }
     }
 
