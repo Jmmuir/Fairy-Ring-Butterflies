@@ -69,28 +69,35 @@ public class FairyRing {
     }
 
     private void applyColourCode(int bodyColour, int innerColour, int outerColour) {
-        Model model = gameObject.getRenderable().getModel();
-        int[] colours1 = model.getFaceColors1();
-        int[] colours2 = model.getFaceColors2();
-        int[] colours3 = model.getFaceColors3();
-        int i = 0;
-        int relativePos = 0;
-        if (isPOH) {
-            i = POH_COLOUR_REGION_OFFSET;
-            relativePos = POH_COLOUR_REGION_OFFSET;
-        }
-        for (; i < colours1.length; i++) {
-            if (isButterflyBody(i)) {
-                colours1[i] = bodyColour;
-                colours2[i] = bodyColour;
-                colours3[i] = bodyColour;
-            } else if (i > 115) {
-                if (INNER_COLOUR_POSITIONS.contains(i - relativePos)) {
-                    recolourRegion(i, colours1, colours2, colours3, innerColour);
-                } else if (OUTER_COLOUR_POSITIONS.contains(i - relativePos) || REVERSE_COLOUR_POSITIONS.contains(i - relativePos) || EDGE_COLOUR_POSITIONS.contains(i - relativePos)) {
-                    recolourRegion(i, colours1, colours2, colours3, outerColour);
+        Model model;
+        try {
+            model = gameObject.getRenderable().getModel();
+            int[] colours1 = model.getFaceColors1();
+            int[] colours2 = model.getFaceColors2();
+            int[] colours3 = model.getFaceColors3();
+            int i = 0;
+            int relativePos = 0;
+            if (isPOH) {
+                i = POH_COLOUR_REGION_OFFSET;
+                relativePos = POH_COLOUR_REGION_OFFSET;
+            }
+            for (; i < colours1.length; i++) {
+                if (isButterflyBody(i)) {
+                    colours1[i] = bodyColour;
+                    colours2[i] = bodyColour;
+                    colours3[i] = bodyColour;
+                } else if (i > 115) {
+                    if (INNER_COLOUR_POSITIONS.contains(i - relativePos)) {
+                        recolourRegion(i, colours1, colours2, colours3, innerColour);
+                    } else if (OUTER_COLOUR_POSITIONS.contains(i - relativePos) || REVERSE_COLOUR_POSITIONS.contains(i - relativePos) || EDGE_COLOUR_POSITIONS.contains(i - relativePos)) {
+                        recolourRegion(i, colours1, colours2, colours3, outerColour);
+                    }
                 }
             }
+        } catch (NullPointerException e) {
+            System.out.println("NPException trying to recolour a ring, probably trying to colour something with no model.");
+            System.out.println("If you see this, please report it on the plugin's github.");
+            e.printStackTrace();
         }
     }
 

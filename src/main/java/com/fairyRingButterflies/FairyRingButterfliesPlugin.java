@@ -1,8 +1,11 @@
 package com.fairyRingButterflies;
 
 import com.google.inject.Provides;
+import jdk.vm.ci.meta.Local;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.Model;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
@@ -12,6 +15,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 
 import javax.inject.Inject;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +29,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	private static Integer STANDARD_RING_ID = 29495;
 	private static Integer ZANARIS_RING_ID = 29560;
 	private static Integer POH_RING_ID = 29228;
+	private static Integer SPIRITUAL_FAIRY_RING = 29229;
 
 	private static List<Integer> fairyRingIds = Arrays.asList(STANDARD_RING_ID, ZANARIS_RING_ID, POH_RING_ID);
 
@@ -61,7 +66,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
+		if (gameStateChanged.getGameState().equals(GameState.LOGGED_IN)) {
 			Scene scene = client.getScene();
 			Tile[][] tiles = scene.getTiles()[0];
 			for (int x = 0; x < Constants.SCENE_SIZE; ++x) {
@@ -81,6 +86,8 @@ public class FairyRingButterfliesPlugin extends Plugin {
 					}
 				}
 			}
+		} else if (gameStateChanged.getGameState().equals(GameState.LOADING)) {
+			fairyRings.clear();
 		}
 	}
 
@@ -301,4 +308,5 @@ public class FairyRingButterfliesPlugin extends Plugin {
 			}
 		}
 	}
+
 }
