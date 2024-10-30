@@ -1,13 +1,12 @@
 package com.fairyRingButterflies;
 
 import com.google.inject.Provides;
-import jdk.vm.ci.meta.Local;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.Model;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
@@ -15,7 +14,6 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 
 import javax.inject.Inject;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,14 +52,17 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	@Inject
 	private ConfigManager configManager;
 
+	@Inject
+	private ClientThread clientThread;
+
 	@Override
 	protected void startUp() throws Exception {
-		applySettings();
+		clientThread.invokeLater(this::applySettings);
 	}
 
 	@Override
 	protected void shutDown() throws Exception {
-        resetToOriginalColours();
+        clientThread.invokeLater(this::resetToOriginalColours);
 	}
 
 	@Subscribe
@@ -105,7 +106,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 				if (event.getKey().equals("import") && event.getNewValue().equals("true")) {
 					ConfigExportImport.ImportConfigFromTextBox(configManager);
 				}
-				applySettings();
+				clientThread.invokeLater(this::applySettings);
 			}
 		}
 	}
