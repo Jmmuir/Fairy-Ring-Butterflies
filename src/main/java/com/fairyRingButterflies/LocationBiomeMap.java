@@ -24,6 +24,7 @@ public class LocationBiomeMap {
         map = new HashMap<>();
         map.put(2996, Biome.ISLAND); //AIQ
         map.put(2700, Biome.PLAINS); //AIR - This is an island, but making it island causes it to recolour the two nearby ones when it loads.
+        map.put(1429, Biome.MOUNTAINS); //AIS
         map.put(1651, Biome.PLAINS); //AJP
         map.put(2735, Biome.CAVE); //AJQ
         map.put(2780, Biome.MOUNTAINS); //AJR
