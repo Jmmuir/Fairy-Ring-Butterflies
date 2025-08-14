@@ -112,11 +112,9 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	private void applySettings() {
-		if (!fairyRings.isEmpty()) {
-			for (FairyRing fairyRing : fairyRings) {
-                applySettingsToRing(fairyRing);
-			}
-		}
+        for (FairyRing fairyRing : fairyRings) {
+            applySettingsToRing(fairyRing);
+        }
 		if (pohRing != null) {
 			applySettingsToRing(pohRing);
 		}
@@ -215,7 +213,6 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	private void addToRememberedFairyRings(GameObject gameObject) {
-		
 		//Have to hold onto last 3 rings, as that's how many can be on screen.
 		//Hold the POH one separately as it's a different model.
 		if (gameObject.getId() == POH_RING_ID) {
@@ -233,6 +230,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
             }
 			WorldPoint location = gameObject.getWorldLocation();
             fairyRings.add(new FairyRing(gameObject, false, LocationBiomeMap.getBiomeForCoordinates(location.getX(), location.getY())));
+			pohRing = null;
 		}
 	}
 
