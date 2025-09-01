@@ -19,12 +19,14 @@ public class FairyRing {
 
     GameObject gameObject;
     boolean isPOH;
+    boolean everRecoloured;
     Biome biome;
 
     public FairyRing (GameObject gameObject, boolean isPOH, Biome biome) {
         this.gameObject = gameObject;
         this.isPOH = isPOH;
         this.biome = biome;
+        this.everRecoloured = false;
     }
 
     private boolean isButterflyBody(int arrayPosition) {

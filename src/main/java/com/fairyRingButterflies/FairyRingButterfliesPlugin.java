@@ -121,6 +121,19 @@ public class FairyRingButterfliesPlugin extends Plugin {
 	}
 
 	private void applySettingsToRing(FairyRing fairyRing) {
+		if (fairyRing.gameObject.getRenderable().getModel() == null) {
+			if (!fairyRing.everRecoloured) {
+				WorldPoint location = fairyRing.gameObject.getWorldLocation();
+				log.warn("Wrongly assumed a game object: " + fairyRing.gameObject.getId() + " was a fairy ring. Object at: " + location.getX() + " " + location.getY());
+				log.warn("If you see this, please report it on the plugin's github.");
+			}
+			//Fairy ring model has been reclaimed. We could catch the inevitable exception, or interrupt it early to save time.
+			if (fairyRing.isPOH) {
+				pohRing = null;
+			} else {
+				fairyRings.remove(fairyRing);
+			}
+		}
 		if (!config.biomeColours() || fairyRing.biome == null) {
 			if (config.removeButterflies()) {
 				fairyRing.removeButterflies();
