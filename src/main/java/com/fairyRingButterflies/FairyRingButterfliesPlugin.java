@@ -214,6 +214,7 @@ public class FairyRingButterfliesPlugin extends Plugin {
 					break;
 			}
 		}
+		fairyRing.everRecoloured = true;
 	}
 
 	@Subscribe
